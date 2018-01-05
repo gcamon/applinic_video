@@ -3,6 +3,9 @@ var config = require("./config");
 var router = config.router;
 
 module.exports = function(model,io,streams) {
+  router.get("/",function(req,res){
+    res.render("index");
+  })
 
   router.get("/user/:id",function(req,res){
     console.log(req.params)
