@@ -28,15 +28,13 @@ module.exports = function(model,io,streams) {
 
    
    router.get('/user/streams.json/:controlId',function(req,res){
-     if(req.user) {
+    
       streams.getStreamToControl(req.params.controlId,model,function(streamList){
         var data = (JSON.parse(JSON.stringify(streamList)));
         console.log(data)    
         res.status(200).json(data);
       });//streams.getStreams();     
-     } else {
-      res.end("Please login before you can access streams.")
-     }
+     
   });
 
 }

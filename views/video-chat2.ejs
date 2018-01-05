@@ -40,7 +40,7 @@
     <main class="container-fluid" style="padding: 0;margin: 0">
         <header style="margin-bottom: 3px;background-color: #d9edf7;padding: 10px 30px" ng-controller="LocalStreamController as localStream" class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">                
-                <a  href="" ng-click="goToDashbaord()" class="btn btn-primary" style="color:#fff">Back to dashboard</a>
+                <a ng-click="goToDashbaord()" class="btn btn-primary" style="color:#fff">Back to dashboard</a>
                 <span ng-cloak>{{localStream.getControlId('<%= person.controlId %>')}}</span>
                 <span ng-cloak>{{localStream.getUser('<%= person.userId %>','<%= person.firstname %>','<%= person.title %>','<%= person.name %>','<%= person.type %>')}}</span>
                 <!--Appear as: <input ng-model="localStream.name" class="form-control" style="width: 50%;display: inline-block;"/>-->
