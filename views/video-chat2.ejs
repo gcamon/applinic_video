@@ -1,0 +1,117 @@
+<!doctype html>
+<!--[if lt IE 7]>       <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>          <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>          <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang=""  > <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Applinic video</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/normalize.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/icomoon.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/transitions.css">
+    <link rel="stylesheet" href="/assets/css/color.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+      <script src="/assets/js/vendor2.js"></script>-->
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link type="style/css" rel="stylesheet" href="/assets/css/video.css">
+    <!--<script type="text/javascript" src="/assets/js/source.js"></script>-->
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/js/adapter.js"></script>
+    <script type="text/javascript" src="/assets/js/rtcClient.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js">
+    </script>
+    <!--<script type="text/javascript" src="/assets/js/angular-source.js"></script>-->
+    <script type="text/javascript" src="/assets/js/angularVideo.js"></script>
+        
+</head>
+<body style="overflow-x: hidden;" ng-app = "rtcVideo">
+    <main class="container-fluid" style="padding: 0;margin: 0">
+        <header style="margin-bottom: 3px;background-color: #d9edf7;padding: 10px 30px" ng-controller="LocalStreamController as localStream" class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">                
+                <a  href="" ng-click="goToDashbaord()" class="btn btn-primary" style="color:#fff">Back to dashboard</a>
+                <span ng-cloak>{{localStream.getControlId('<%= person.controlId %>')}}</span>
+                <span ng-cloak>{{localStream.getUser('<%= person.userId %>')}}</span>
+                <!--Appear as: <input ng-model="localStream.name" class="form-control" style="width: 50%;display: inline-block;"/>-->
+                <a href ng-click="localStream.toggleCam()" class="btn btn-primary" style="color:#fff;float: right;background-color: orange">{{ (localStream.cameraIsOn === true) ? 'Streaming... ( disconnect )' : 'Connect ' }}</a>                
+            </div>
+            <div  class="col-sm-12 col-md-6 col-lg-6">
+            <a href=""><i class="fa fa-camera" ng-click="streamControl()"> videos</i></a>&nbsp;&nbsp;
+                <a href=""><i class="fa fa-user" ng-click="invite()"> invite</i> </a>&nbsp;&nbsp;  
+                <!--<div class="row">
+                    <div class="col-sm-12 col-md-7 col-lg-7">
+                        <video id="localVideo" muted="muted" autoplay="true" style="width: 100px;height:100px;"></video>
+                    </div>
+                    <div class="col-sm-12 col-md-5 col-lg-5" style="text-align: center;padding:30px 30px 0 0">
+                        <button ng-click="allLocalStreams()" class="btn btn-primary">View remote streams</button>
+                    </div>
+                </div>-->                
+            </div>
+        </header>
+
+       
+        <section class="row" ng-controller='RemoteStreamsController as rtc'> <!--ng-controller='siteRemoteStreamsController as rtc' -->  
+            
+            <div class="col-sm-9 col-md-9 col-lg-9" style="margin-top:10px;padding: 0">
+                <div style="width: 80%;margin: 0 auto">
+                    
+                    <div style="display: inline-block;padding: 8px 8px 0 8px;border:2px solid #d9edf7">
+                        <p style="text-align: center;padding: 4px;color: orange;background-color: #d9edf7">Your Cam</p>
+                        <video id="localVideo" muted="muted" autoplay="true" style="width:auto;height:250px;margin-top: -4px"></video>
+                    </div>                   
+                    <div id="remoteVideosContainer" style="display: inline-block;padding: 8px 8px 0 8px;border:2px solid #d9edf7">
+                        
+                    </div>                    
+                </div> 
+                <span style="visibility: hidden;">{{rtc.siteLink('<%= person.controlId %>','<%= person.userId %>')}}</span>               
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top:10px;padding: 0">
+                <h5 style="padding: 10px;text-align: center;background-color: #1d7e5f;color:#fff">Available live streams</h5>
+                <div ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}" >
+                    <p>{{stream.name}}</p>
+                    <button ng-click="rtc.view(stream)" class="btn btn-success">View</button>
+                    <!--<button ng-click="rtc.call(stream)"><a>Call</a></button>-->
+                </div>
+            </div>
+             
+        </section>
+    </main>                     
+</body>
+</html>
+
+
+<!---
+
+    <header style="margin-bottom: 3px;background-color: #d9edf7;padding: 10px" class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                 <a href="{{}}">Back to dashboard</a>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <a href=""><i class="fa fa-camera" ng-click="streamControl()"> videos</i></a>&nbsp;&nbsp;
+                <a href=""><i class="fa fa-user" ng-click="invite()"> invite</i> </a>&nbsp;&nbsp;
+            </div>          
+        </header>        
+        <section class="row">
+           <div class="col-sm-12 col-md-9 col-lg-9" style="margin-top:10px;padding: 0">
+                <div  style="width: 70%;margin: 0 auto">
+                    <div style="display: inline-block;padding: 8px 8px 0 8px;border:2px solid #d9edf7">
+                        <p style="text-align: center;padding: 4px;color: orange;background-color: #d9edf7">Your Cam</p>
+                        <video id="localVideo" muted="muted" autoplay="true" style="width:auto;height:280px;margin-top: -10px"></video>
+                    </div>                   
+                    <div id="remoteVideosContainer" style="display: inline-block;padding: 8px 8px 0 8px;border:2px solid #d9edf7">
+                        
+                    </div>                    
+                </div>                
+            </div>
+-->
