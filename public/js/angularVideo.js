@@ -115,6 +115,8 @@
 				control.controlId = controlId;
 				//join a room
 	    	rtc.name = title + " " + firstname + " " + name  || 'Guest';
+	    	client.controlJoin(controlId,rtc.name);
+	    	 return $window.location.host + "/user/cam/" + controlId;
 				
 
 				/*var url = "/user/" + id;
@@ -240,6 +242,7 @@
 			if(count < 1) {
 				localStream.name = title + " " + firstname + " " + name  || 'Guest';
 				user.typeOfUser = type;
+				localStream.toggleCam();
 				//To be used when database server is restored.
 				/*var url = "/user/" + id;
 				$http({
