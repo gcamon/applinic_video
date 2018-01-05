@@ -9,7 +9,7 @@ module.exports = function(model,io,streams) {
 
   router.get("/user/:id",function(req,res){
     console.log(req.params)
-    model.user.findOne({user_id: req.params.id},{firstname:1,lastname:1,title:1,_id:0,name:1},function(err,data){
+    model.user.findOne({user_id: req.params.id},{firstname:1,lastname:1,title:1,_id:0,name:1,type:1},function(err,data){
       if(err) throw err;
       console.log(data)
       res.send(data);

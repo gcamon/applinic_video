@@ -229,7 +229,7 @@
 	app.controller('LocalStreamController',['camera','$rootScope', '$scope', '$http','localManager','$window','$location',
 	 function(camera,$rootScope, $scope, $http, localManager, $window, $location){
 		var localStream = this;
-		
+		var user = {};
 		//localStream.name = "guest" //user.title + " " + user.firstname + " " + user.lastname  || 'Guest';
 		localStream.link = '';
 		localStream.cameraIsOn = false;
@@ -246,6 +246,7 @@
 		    .success(function(user) {
 		     if(user){
 		     	 localStream.name = user.title + " " + user.firstname + " " + user.lastname  || 'Guest';
+		     	 user.typeOfUser = user.type;
 		     	 localStream.toggleCam();
 		     } else {
 		     	 window.location.href = "https://applinic.com/login";
