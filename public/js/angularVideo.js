@@ -116,7 +116,7 @@
 				//join a room
 	    	rtc.name = title + " " + firstname + " " + name  || 'Guest';
 	    	client.controlJoin(controlId,rtc.name);
-	    	 return $window.location.host + "/user/cam/" + controlId;
+
 				
 
 				/*var url = "/user/" + id;
@@ -135,7 +135,8 @@
 		     client.controlJoin(controlId,rtc.name); 
 				 return $window.location.host + "/user/cam/" + controlId;
 		    });*/
-		    count++;    
+		    count++;  
+		    return $window.location.host + "/user/cam/" + controlId;  
 	    }              
 			
 		}
