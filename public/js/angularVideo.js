@@ -110,12 +110,14 @@
 
 		var count = 0;		
 
-		rtc.siteLink = function(controlId, id){
+		rtc.siteLink = function(controlId, id, name, title, firstname){
 			if(count < 1) {
 				control.controlId = controlId;
 				//join a room
-	    	
-				var url = "/user/" + id;
+	    	rtc.name = title + " " + firstname + " " + name  || 'Guest';
+				
+
+				/*var url = "/user/" + id;
 				$http({
 		      method  : 'GET',
 		      url     : url,
@@ -130,7 +132,7 @@
 
 		     client.controlJoin(controlId,rtc.name); 
 				 return $window.location.host + "/user/cam/" + controlId;
-		    });
+		    });*/
 		    count++;    
 	    }              
 			
@@ -234,10 +236,12 @@
 		localStream.link = '';
 		localStream.cameraIsOn = false;
 		var count = 0;
-		localStream.getUser = function(id){
+		localStream.getUser = function(id,firstname,title,name,type){
 			if(count < 1) {
-				alert(id)
-				var url = "/user/" + id;
+				localStream.name = title + " " + firstname + " " + name  || 'Guest';
+				user.typeOfUser = type;
+				//To be used when database server is restored.
+				/*var url = "/user/" + id;
 				$http({
 		      method  : 'GET',
 		      url     : url,
@@ -251,7 +255,7 @@
 		     } else {
 		     	 window.location.href = "https://applinic.com/login";
 		     }
-		    });
+		    });*/
 		    count++;    
 	    }              
 		}

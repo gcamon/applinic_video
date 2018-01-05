@@ -54,7 +54,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6">
                  <a href="" ng-click="goToDashbaord()" class="btn btn-primary" style="color:#fff">Back to dashboard</a>&nbsp;&nbsp;&nbsp;
                  <span ng-cloak style="font-size: 10px">{{localStream.getControlId('<%= person.controlId %>')}}</span>
-                 <span ng-cloak style="font-size: 10px">{{localStream.getUser('<%= person.userId %>')}}</span>
+                 <span ng-cloak style="font-size: 10px">{{localStream.getUser('<%= person.userId %>','<%= person.firstname %>','<%= person.title %>','<%= person.name %>','<%= person.type %>')}}</span>
                 <!--Appear as: <input ng-model="localStream.name" class="form-control" style="width: 50%;display: inline-block;"/>-->
                 <a href ng-click="localStream.toggleCam()" class="btn btn-primary" style="color:#fff;float: right;background-color: orange">{{ (localStream.cameraIsOn === true) ? 'Streaming... ( disconnect )' : 'Connect' }}</a>                           
             </div>
@@ -71,7 +71,7 @@
                     <h5 style="display: inline-block;">{{stream.name}}</h5>
                     <button ng-click="rtc.view(stream)" class="btn btn-success">View</button>
                 </div>
-                <span style="visibility: hidden;">video connection channel : &nbsp;{{rtc.siteLink('<%= person.controlId %>','<%= person.userId %>')}}</span>
+                <span style="visibility: hidden;">video connection channel : &nbsp;{{rtc.siteLink('<%= person.controlId %>','<%= person.userId %>','<%= person.name %>','<%= person.title %>','<%= person.firstname %>')}}</span>
             </div> 
 
 

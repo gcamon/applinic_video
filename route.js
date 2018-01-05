@@ -7,20 +7,21 @@ module.exports = function(model,io,streams) {
     res.render("index");
   })
 
-  router.get("/user/:id",function(req,res){
+  //uncomment when db server is restored
+  /*router.get("/user/:id",function(req,res){
     console.log(req.params)
     model.user.findOne({user_id: req.params.id},{firstname:1,lastname:1,title:1,_id:0,name:1,type:1},function(err,data){
       if(err) throw err;
       console.log(data)
       res.send(data);
     })
-  })
+  })*/
 
-  router.get("/user/cam/:controlId/:userId/:type",function(req,res){
+  router.get("/user/cam/:controlId/:userId/:type/:title/:firstname/:name",function(req,res){
     if(req.params.type === "Doctor"){
-      res.render("video-chat",{"person":{controlId: req.params.controlId,userId: req.params.userId}});
+      res.render("video-chat",{"person":req.params});
     } else {
-      res.render("video-chat2",{"person":{controlId: req.params.controlId, userId: req.params.userId}});
+      res.render("video-chat2",{"person":req.params});
     }   
     
   });

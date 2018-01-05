@@ -26,9 +26,9 @@ module.exports = function() {
     },*/
 
     addStream : function(id, name, controlId,model) {
-            
+          
       //controlwill be deleted after 10 hour as ttl was set for every instance of control that was initiated on socket.js
-      model.control.findOne({controlId: controlId}).exec(function(err,control){
+      /*model.control.findOne({controlId: controlId}).exec(function(err,control){
         console.log(control);
         var stream = new Stream(id, name, controlId);
         if(err) throw err;
@@ -42,13 +42,16 @@ module.exports = function() {
           })
         }
 
+      });*/
 
-      });
-      /*if(controls[controlId]) {
+      /* As at the time of the writing the server for database have not been created so i am using array for testing purposes
+        remember to uncomment the code above if db is restored
+       */
+      if(controls[controlId]) {
         controls[controlId].push(stream);
       } else {
         this.addControl(controlId)
-      }*/
+      }
     },
 
     removeStream : function(id) {
@@ -80,7 +83,7 @@ module.exports = function() {
     },
 
     getStreamToControl: function(controlId,model,cb) { 
-      model.control.findOne({controlId: controlId},{streams:1},function(err,data){
+      /*model.control.findOne({controlId: controlId},{streams:1},function(err,data){
         if(err) throw err;
         //var list = data.streams || [];
         var list;
@@ -89,12 +92,16 @@ module.exports = function() {
         } else {
           list = [];
         }
-        cb(list); //use data.streams
-      })
-      /*var controlStreamList = (controls.hasOwnProperty(controlId)) ? controls[controlId] : addControl(controlId);
+        cb(list); 
+      })*/
+
+      /* As at the time of the writing the server for database have not been created so i am using array for testing purposes
+        remember to uncomment the code above if db server is restored
+      */
+      var controlStreamList = (controls.hasOwnProperty(controlId)) ? controls[controlId] : addControl(controlId);
       if(controlStreamList) {
-        return controlStreamList;
-      }*/
+        cb(controlStreamList);
+      }
     },
 
   }
