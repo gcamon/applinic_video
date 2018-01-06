@@ -48,6 +48,7 @@ module.exports = function() {
         remember to uncomment the code above if db is restored
        */
       if(controls[controlId]) {
+        var stream = new Stream(id, name, controlId);
         controls[controlId].push(stream);
       } else {
         this.addControl(controlId)
