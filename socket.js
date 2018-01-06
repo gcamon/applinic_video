@@ -142,7 +142,7 @@ module.exports = function(model,io,streams) {
     	console.log(control);
     	socket.join(control.control);//control.joins a roo
     	cb(control);
-    	//streams.addStream(socket.id,control.name,control.control,model)
+    	streams.addStream(socket.id,control.name,control.control,model)
     })
 
     socket.on('readyToStream', function(options,cb) {

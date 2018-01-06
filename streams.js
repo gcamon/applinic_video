@@ -47,9 +47,13 @@ module.exports = function() {
       /* As at the time of the writing the server for database have not been created so i am using array for testing purposes
         remember to uncomment the code above if db is restored
        */
-      if(controls[controlId]) {
-        var stream = new Stream(id, name, controlId);
-        controls[controlId].push(stream);
+      var stream = new Stream(id, name, controlId);
+      if(controls[controlId]) {        
+        var elemPos = controls[controlId].map(function(x){return x.id}).indexOf(id);        
+        if(elemPos === -1) {         
+          controls[controlId].push(stream);
+        }
+        return;        
       } else {
         this.addControl(controlId,stream)
       }
