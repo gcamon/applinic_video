@@ -51,7 +51,7 @@ module.exports = function() {
         var stream = new Stream(id, name, controlId);
         controls[controlId].push(stream);
       } else {
-        this.addControl(controlId)
+        this.addControl(controlId,stream)
       }
     },
 
@@ -73,12 +73,12 @@ module.exports = function() {
 
     
 
-    addControl: function(controlId){
+    addControl: function(controlId,stream){
       //check to see if control does not exist then add it 
       //do database search to find a control the requested site belongs to.
       //if control is found attach the control id to the controls object properties  
       if(!controls.hasOwnProperty(controlId)) {
-        controls[controlId] = [];
+        controls[controlId] = [stream];
       }
       
     },
