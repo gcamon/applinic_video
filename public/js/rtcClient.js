@@ -4,8 +4,7 @@ var PeerManager = (function (name) {
       config = {
         peerConnectionConfig: {
           iceServers: [
-            {"url": "stun:23.21.150.121"},
-            {"url": "stun:stun.l.google.com:19302"}
+           {"url": "turn:45.55.203.165:8443?transport=udp"}
           ]
         },
         peerConnectionConstraints: {
@@ -23,7 +22,10 @@ var PeerManager = (function (name) {
   socket.on('id', function(id) {
     localId = id;
   });
-  
+  // {"url": "stun:23.21.150.121"},
+           // {"url": "stun:stun.l.google.com:19302"}
+  //{"url":"turn:my_username@<turn_server_ip_address>", "credential":"my_password"}]}
+  //turn:coturn-server-ip:8443?transport=udp
 
   //if peer does not exist yet, this function will create peer below otherwise peer will be retreived fron 'peerDatabase' where existin
   //peer are kept. The remark where this happened in "jj".
